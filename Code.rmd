@@ -1,0 +1,117 @@
+---
+title: "Group 8 Project"
+authors: "Alex Haffner, Erica Winters & Chris Hargis"
+output: pdf_document
+---
+```{r}
+
+df = read.csv("C:/Users/charg/Desktop/Masters/Churn_Train.csv")  ##importing dataset
+
+```
+
+See the ratio of the target variable "churn"
+
+```{r}
+table(df$churn)
+```
+
+Check for NAs
+```{r}
+summary(df)
+```
+
+Removing the NA values from the number_vmail_messages column
+
+```{r}
+library(tidyr)
+
+df = df[!is.na(df$number_vmail_messages),]
+
+```
+
+
+After examining the csv file, once the above code is ran the remaining NAs are the only NAs for that row.
+We can fill those NAs with the mean for that column so that we can keep the data.
+This will result in better training and testing for our model. 
+
+Updating the remaining NAs with the column mean:
+
+```{r}
+
+# replacing all the NA values with the mean of the columns
+df$account_length[is.na(df$account_length)]<-mean(df$account_length,na.rm=TRUE)
+df$total_eve_minutes[is.na(df$total_eve_minutes)]<-mean(df$total_eve_minutes,na.rm=TRUE)
+df$total_intl_calls[is.na(df$total_intl_calls)]<-mean(df$total_intl_calls,na.rm=TRUE)
+
+
+apply(df, 2, function(x) any(is.na(x)))                    # Checking if there are any NA values
+
+```
+
+
+Create training and test sample sets:
+
+Create Training Set:
+```{r}
+no_churn_df = df[which(df$churn == "no"), ]
+yes_churn_df = df[which(df$churn == "yes"), ]
+
+```
+
+set training set to 75% of data
+```{r}
+set.seed(120)
+training_data_1 = sample(1:nrow(no_churn_df), 0.75*nrow(no_churn_df))
+training_data_2 = sample(1:nrow(yes_churn_df), 0.75*nrow(yes_churn_df))
+
+training_1 = no_churn_df[-training_data_1, ]
+training_2 = yes_churn_df[-training_data_2, ]
+
+training_data = rbind(training_1, training_2)
+
+```
+
+
+Creating the Test Set
+```{r}
+test_1 = no_churn_df[-training_data_1, ]
+test_2 = yes_churn_df[-training_data_2, ]
+
+test_data = rbind(test_1, test_2)
+
+```
+
+
+Visualizing the variable's frequency
+
+```{r}
+par(mfrow = c(3, 4))
+for( i in 1 : 20){
+  hist(df[,i], main = colnames(df)[i], xlab = colnames(df)[i], col = 'darkorchid1')
+}
+
+```
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
