@@ -3,7 +3,7 @@ title: "Group 8 Project"
 authors: "Alex Haffner, Erica Winters & Chris Hargis"
 output: pdf_document
 ---
-Our strategy is to use a logistic regression model that is easy to build and maintain. The purpose of this model will be to predict and classify customers that will churn or will not churn. This model can use a few, several or all the variables from a given dataset to return a binary output. This strategy will work well because we can determine the important criteria for customer churn for your business then create the model that will return the necessary binary output needed for the company’s insights. 
+Our strategy is to use a logistic regression model that is easy to build and maintain. The purpose of this model will be to predict and classify customers that will churn or will not churn. This model can use a single, several or all the variables from a given dataset to return a binary output. This strategy will work well because we can determine the important criteria for customer churn for your business then create the model that will return the necessary binary output needed for the company’s insights. 
 
 ```{r}
 
